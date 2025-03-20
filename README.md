@@ -28,6 +28,10 @@ It achieves this by bridging the gap between premium chatbot accounts and applic
 - [ ] DeepSeek
 - [ ] ...
 
+## Workflow
+
+![Chapito workflow](https://github.com/user-attachments/assets/afde0d72-3e43-4d1f-8ffc-b675897a33af)
+
 ## Demo
 
 https://github.com/user-attachments/assets/869963bc-48cf-43f8-9a2c-9bd4a41c30d9
