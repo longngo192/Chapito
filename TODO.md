@@ -1,9 +1,15 @@
 # Chapito - TODO
 
+## FEATURES
+
 - [ ] Add support for other webchat.
-- [x] Use "paste" in the chatbot instead of sending lines 1 by 1.
-- [x] Use config file to customize things (user agent, timeout, ...).
+- [ ] Add "models" endpoint.
+
+## BUG
+
+- [ ] Correct error "/chat/completions HTTP/1.1" 422 Unprocessable Entity"
+
+## TESTS
+
 - [ ] Test with other AI tools.
-- [x] Save browser profile.
-- [x] Loop to check if chatbot is ready.
 - [ ] Add unit tests.
