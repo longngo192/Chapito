@@ -28,6 +28,10 @@ It achieves this by bridging the gap between premium chatbot accounts and applic
 - [ ] DeepSeek
 - [ ] ...
 
+## Demo
+
+https://github.com/user-attachments/assets/869963bc-48cf-43f8-9a2c-9bd4a41c30d9
+
 ## Usage
 
 ### 1. Run the proxy
