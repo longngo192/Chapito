@@ -106,3 +106,10 @@ cd Chapito
 uv venv
 uv sync
 ```
+
+## F.A.Q
+
+**Q: The chat bot always gives code inside `<![CDATA[` and `]]>` tags.**  
+**A:** This is because the chat bot is designed to generate code that can be used in XML documents. The `<![CDATA[` and `]]>` tags are used to indicate that the text inside them should be treated as plain text, not as XML markup. If you want to remove these tags, you can explicitly tell the chat bot that you don't want to use them.
+Eg. with `Roo-Code`:
+Add the following custom instruction: `Do not use <![CDATA[ and ]]> tags in your responses.`

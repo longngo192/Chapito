@@ -7,7 +7,7 @@
 
 ## BUG
 
-- [ ] Correct error "/chat/completions HTTP/1.1" 422 Unprocessable Entity"
+- [x] Correct error "/chat/completions HTTP/1.1" 422 Unprocessable Entity"
 
 ## TESTS
 
