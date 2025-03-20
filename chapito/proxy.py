@@ -1,8 +1,10 @@
-from typing import Callable, List
-from fastapi import FastAPI, HTTPException
+from typing import Callable, List, Optional
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
+
 import time
 import uuid
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 import uvicorn
 import logging
 
@@ -11,9 +13,22 @@ class Message(BaseModel):
     role: str
     content: str
 
+    @field_validator("content", mode="before")
+    def transform_content(cls, value):
+        if isinstance(value, list):
+            text_parts = [item["text"] for item in value if item.get("type") == "text"]
+            return "\n\n".join(text_parts)
+        return value
+
 
 class ChatRequest(BaseModel):
+    model: str
     messages: List[Message]
+    temperature: Optional[float] = None
+    max_tokens: Optional[int] = None
+    top_p: Optional[float] = None
+    frequency_penalty: Optional[float] = None
+    presence_penalty: Optional[float] = None
 
 
 app = FastAPI()
@@ -27,6 +42,11 @@ def find_index_from_end(lst: List[Message], values: List[str]) -> int:
         if message.content.strip() in values:
             return i
     return -1
+
+
+@app.exception_handler(404)
+async def not_found_handler(request: Request, exc: HTTPException):
+    return JSONResponse(status_code=404, content={"message": "Undefined route", "requested_url": request.url.path})
 
 
 @app.post("/chat/completions")
