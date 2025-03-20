@@ -3,8 +3,8 @@ import argparse
 from enum import Enum
 import logging
 
-from proxy_chat.tools.log import setup_logging_verbosity
-from proxy_chat.types import Chatbot
+from chapito.tools.log import setup_logging_verbosity
+from chapito.types import Chatbot
 
 DEFAULT_CONFIG_PATH: str = "config.ini"
 DEFAULT_USE_BROWSER_PROFILE: bool = True

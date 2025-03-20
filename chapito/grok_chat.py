@@ -1,49 +1,38 @@
-import contextlib
 import time
 import logging
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
-
 from bs4 import BeautifulSoup, Tag
 
-from proxy_chat.config import Config
-from proxy_chat.tools.tools import create_driver, transfer_prompt
+from chapito.config import Config
+from chapito.tools.tools import create_driver, transfer_prompt
 
-MISTRAL_URL: str = "https://chat.mistral.ai/"
+GROK_URL: str = "https://grok.com/"
 TIMEOUT_SECONDS: int = 120
-SUBMIT_CSS_SELECTOR: str = 'button[type="submit"]'
-TEXTAREA_CSS_SELECTOR: str = 'textarea[name="message.text"]'
-ANSWER_CSS_SELECTOR: str = "div.prose"
-SCROLL_DOWN_CSS_SELECTOR: str = 'button.disabled\\:pointer-auto[type="button"]'
+SUBMIT_CSS_SELECTOR: str = 'button[type="submit"][aria-label="Submit"]'
+ANSWER_XPATH: str = '//div[@dir="auto" and contains(@class, "message-bubble")]'
 
 
 def check_if_chat_loaded(driver) -> bool:
     driver.implicitly_wait(5)
     try:
         button = driver.find_element(By.CSS_SELECTOR, SUBMIT_CSS_SELECTOR)
+        captcha_inputs = driver.find_elements(By.NAME, "cf-turnstile-response")
+        captcha_input = captcha_inputs[0] if captcha_inputs else None
+        if captcha_input:
+            logging.error("Cloudflare captcha detected. Please solve it to continue.")
+            return False
     except Exception as e:
         logging.warning("Can't find submit button in chat interface. Maybe it's not loaded yet.")
         return False
     return button is not None
 
 
-def scroll_to_bottom(driver) -> None:
-    with contextlib.suppress(NoSuchElementException):
-        driver.implicitly_wait(1)
-        buttons = driver.find_elements(By.CSS_SELECTOR, SCROLL_DOWN_CSS_SELECTOR)
-        for button in buttons[::-1]:
-            parent_div = button.find_element(By.XPATH, "..")
-            if parent_div.tag_name == "div":
-                button.click()
-                return
-
-
 def initialize_driver(config: Config):
-    logging.info("Initializing browser for Mistral...")
+    logging.info("Initializing browser for Grok...")
     driver = create_driver(config)
-    driver.get(MISTRAL_URL)
+    driver.get(GROK_URL)
 
     while not check_if_chat_loaded(driver):
         logging.info("Waiting for chat interface to load...")
@@ -55,7 +44,7 @@ def initialize_driver(config: Config):
 def send_request_and_get_response(driver, message):
     logging.debug("Send request to chatbot interface")
     driver.implicitly_wait(10)
-    textarea = driver.find_element(By.CSS_SELECTOR, TEXTAREA_CSS_SELECTOR)
+    textarea = driver.find_element(By.TAG_NAME, "textarea")
     transfer_prompt(message, textarea)
     wait = WebDriverWait(driver, TIMEOUT_SECONDS)
     wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, SUBMIT_CSS_SELECTOR)))
@@ -70,7 +59,7 @@ def send_request_and_get_response(driver, message):
     wait = WebDriverWait(driver, TIMEOUT_SECONDS)
     wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, SUBMIT_CSS_SELECTOR)))
 
-    message_bubbles = driver.find_elements(By.CSS_SELECTOR, ANSWER_CSS_SELECTOR)
+    message_bubbles = driver.find_elements(By.XPATH, ANSWER_XPATH)
     if not message_bubbles:
         logging.warning("No message found.")
         return ""
@@ -78,7 +67,6 @@ def send_request_and_get_response(driver, message):
     html = last_message_bubble.get_attribute("outerHTML")
     clean_message = clean_chat_answer(html)
     logging.debug(f"Clean message ends with: {clean_message[-100:]}")
-    scroll_to_bottom(driver)
     return clean_message
 
 
@@ -88,10 +76,15 @@ def clean_chat_answer(html: str) -> str:
     """
     logging.debug("Clean chat answer")
     soup = BeautifulSoup(html, "html.parser")
-    no_prose_divs = soup.find_all("div", class_="sticky")
+    no_prose_divs = soup.find_all("div", class_="not-prose")
     for div in no_prose_divs:
         if isinstance(div, Tag):
+            code_tags = div.find_all("code")
             div.clear()
+            for code in code_tags:
+                div.append(code)
+        else:
+            code_tags = []
 
     code_tags = soup.find_all("code")
     for code_tag in code_tags:

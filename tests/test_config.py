@@ -1,6 +1,6 @@
 import argparse
 import pytest
-from proxy_chat.config import DEFAULT_BROWSER_PROFILE_PATH, DEFAULT_USE_BROWSER_PROFILE, Config
+from chapito.config import DEFAULT_BROWSER_PROFILE_PATH, DEFAULT_USE_BROWSER_PROFILE, Config
 from unittest.mock import patch
 
 

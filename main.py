@@ -1,7 +1,7 @@
-from proxy_chat.config import Config
-from proxy_chat import grok_chat, mistral_chat
-from proxy_chat.proxy import init_proxy
-from proxy_chat.types import Chatbot
+from chapito.config import Config
+from chapito import grok_chat, mistral_chat
+from chapito.proxy import init_proxy
+from chapito.types import Chatbot
 
 
 def main():

@@ -1,17 +1,18 @@
-# Proxy-Chat - Free API access using your web-based chatbots 🤖
+# Chapito (chat-to-API), free API access using your web-based chatbots 🤖
 
 ## Presentation
-The primary goal of proxy-chat is to enable developers to use web-based chatbots —such as Grok, Mistral, ...— with tools that rely on language model (LLM) APIs —like [AIder](https://aider.chat/), [Cline](https://github.com/cline/cline), or [Roo-Code](https://github.com/RooVetGit/Roo-Code)— without needing to pay for additional API subscriptions.  
+
+The primary goal of *Chapito* is to enable developers to use web-based chatbots —such as Grok, Mistral, ...— with tools that rely on language model (LLM) APIs —like [AIder](https://aider.chat/), [Cline](https://github.com/cline/cline), or [Roo-Code](https://github.com/RooVetGit/Roo-Code)— without needing to pay for additional API subscriptions.  
 It achieves this by bridging the gap between premium chatbot accounts and applications that require API access, even for chatbots like Grok that do not offer a native API.  
   
+**Chapito** addresses two key challenges:  
   
-**Proxy-Chat** addresses two key challenges:  
-  
-🔌 **Access to chatbots without APIs:** Many web-based chatbots, such as Grok, lack a direct API, making it difficult for developers to integrate them into their workflows. Proxy-Chat provides a workaround by simulating API access to these chatbots.  
+🔌 **Access to chatbots without APIs:** Many web-based chatbots, such as Grok, lack a direct API, making it difficult for developers to integrate them into their workflows. *Chapito* provides a workaround by simulating API access to these chatbots.  
 💸 **Cost efficiency:** Developers with premium chatbot accounts (e.g., Grok, Mistral, OpenAI) can leverage their existing subscriptions instead of purchasing separate API access, saving money while utilizing the full capabilities of their accounts.  
 
 ### Key functionalities
-Proxy-Chat acts as a local proxy server that connects web-based chatbots to API-dependent applications. Its core features include:  
+
+*Chapito* acts as a local proxy server that connects web-based chatbots to API-dependent applications. Its core features include:  
 
 - 💻 **Local server operation:** runs on your machine, intercepting API requests from tools and relaying them to a web-based chatbot.
 - 🌐 **Browser integration:** uses a web browser to load the chatbot's webpage, automating the process of sending queries and retrieving responses.
@@ -44,6 +45,7 @@ Application will use parameters from command-line args or `config.ini` file.
 
 **Parameters**  
 `cli parameter` / `config file parameter`: description  
+
 - `--chatbot <NAME>`: name of the chat service to use. Possible values: `grok`, `mistral`.
 - `--use-browser-profile` / `use_browser_profile`: when used, a profile will be saved and reused. Usefull when you don't want to authenticate everytime.
 - `--profile-path <PATH>` / `browser_profile_path`: when `--use-browser-profile`, provides the `PATH` where the profile is stored.
@@ -82,8 +84,8 @@ aider --openai-api-base http://127.0.0.1:5001 --openai-api-key fake_key --model 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/PhunkyBob/proxy-chat.git
-cd proxy-chat
+git clone https://github.com/Yajusta/Chapito.git
+cd Chapito
 ```
 
 ### 2. Install dependencies

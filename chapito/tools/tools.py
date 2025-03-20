@@ -1,8 +1,8 @@
 import os
 import platform
 import time
-from proxy_chat.config import Config
-from proxy_chat.types import OsType
+from chapito.config import Config
+from chapito.types import OsType
 from selenium.webdriver.common.keys import Keys
 import pyperclip
 import logging
