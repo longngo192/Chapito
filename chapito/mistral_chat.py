@@ -78,7 +78,7 @@ def send_request_and_get_response(driver, message):
     html = last_message_bubble.get_attribute("outerHTML")
     clean_message = clean_chat_answer(html)
     logging.debug(f"Clean message ends with: {clean_message[-100:]}")
-    scroll_to_bottom(driver)
+    # scroll_to_bottom(driver)
     return clean_message
 
 
