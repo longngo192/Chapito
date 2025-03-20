@@ -1,4 +1,6 @@
-# Chapito (chat-to-API), free API access using your web-based chatbots 🤖
+# Chapito (chat-to-API)
+
+Free API access using your web-based chatbots ![logo](https://github.com/user-attachments/assets/c21a077e-860b-4c84-ab7e-7b65b3e68379)
 
 ## Presentation
 
