@@ -2,10 +2,13 @@ import configparser
 import argparse
 from enum import Enum
 import logging
+import os.path
+from shutil import copy
 
 from chapito.tools.log import setup_logging_verbosity
 from chapito.types import Chatbot
 
+SAMPLE_CONFIG_FILE: str = "config.ini.sample"
 DEFAULT_CONFIG_PATH: str = "config.ini"
 DEFAULT_USE_BROWSER_PROFILE: bool = True
 DEFAULT_BROWSER_PROFILE_PATH: str = "browser_profile"
@@ -14,6 +17,10 @@ DEFAULT_BROWSER_USER_AGENT: str = (
 )
 DEFAULT_VERBOSITY: int = 1
 DEFAULT_CHATBOT: Chatbot = Chatbot.GROK
+
+
+def create_config_file() -> None:
+    copy(SAMPLE_CONFIG_FILE, DEFAULT_CONFIG_PATH)
 
 
 class Config:
@@ -26,6 +33,8 @@ class Config:
 
     def __init__(self):
         logging.debug("Initializing config...")
+        if not os.path.isfile(DEFAULT_CONFIG_PATH):
+            create_config_file()
         parser = argparse.ArgumentParser()
         parser.add_argument(
             "--config", type=str, help="Path to the config file (default: config.ini)", default=DEFAULT_CONFIG_PATH
