@@ -11,3 +11,5 @@ class OsType(Enum):
 class Chatbot(Enum):
     GROK = "grok"
     MISTRAL = "mistral"
+    PERPLEXITY = "perplexity"
+    OPENAI = "openai"

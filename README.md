@@ -2,6 +2,10 @@
 
 Free API access using your web-based chatbots ![logo](https://github.com/user-attachments/assets/c21a077e-860b-4c84-ab7e-7b65b3e68379)
 
+## 0.1.3 (2025-03-21)
+
+- [NEW] Add OpenAI ChatGPT.
+
 ## Presentation
 
 The primary goal of *Chapito* is to enable developers to use web-based chatbots —such as Grok, Mistral, ...— with tools that rely on language model (LLM) APIs —like [AIder](https://aider.chat/), [Cline](https://github.com/cline/cline), or [Roo-Code](https://github.com/RooVetGit/Roo-Code)— without needing to pay for additional API subscriptions.  
@@ -26,7 +30,7 @@ It achieves this by bridging the gap between premium chatbot accounts and applic
 - [x] [Grok](https://grok.com/)
 - [x] [Mistral](https://chat.mistral.ai/chat)
 - [ ] Anthropic
-- [ ] OpenAI
+- [x] OpenAI
 - [ ] DeepSeek
 - [ ] ...
 
@@ -38,7 +42,7 @@ It achieves this by bridging the gap between premium chatbot accounts and applic
 
 <https://github.com/user-attachments/assets/869963bc-48cf-43f8-9a2c-9bd4a41c30d9>
 
-Explanation: 
+Explanation:  
 
 - Top left window: runs `Chapito`. Once launched, user don't have to interact with it.
 - Top right window: browser used par *Chapito*. User don't have to interact with it.

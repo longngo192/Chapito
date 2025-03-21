@@ -1,5 +1,9 @@
 # Chapito - Changelog
 
+## 0.1.3 (2025-03-21)
+
+- [NEW] Add OpenAI ChatGPT.
+
 ## 0.1.2 (2025-03-20)
 
 - [DOC] Add documentation.
