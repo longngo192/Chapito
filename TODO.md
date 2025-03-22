@@ -4,6 +4,7 @@
 
 - [ ] Add support for other webchat.
 - [ ] Add "models" endpoint.
+- [ ] Add image support.
 
 ## BUG
 

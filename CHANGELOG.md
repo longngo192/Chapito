@@ -1,5 +1,9 @@
 # Chapito - Changelog
 
+## 0.1.4 (2025-03-22)
+
+- [NEW] Add DeepSeek.
+
 ## 0.1.3 (2025-03-21)
 
 - [NEW] Add OpenAI ChatGPT.

@@ -2,9 +2,9 @@
 
 Free API access using your web-based chatbots ![logo](https://github.com/user-attachments/assets/c21a077e-860b-4c84-ab7e-7b65b3e68379)
 
-## 0.1.3 (2025-03-21)
+## Current version 0.1.4 (2025-03-22)
 
-- [NEW] Add OpenAI ChatGPT.
+- [NEW] Add DeepSeek.
 
 ## Presentation
 
@@ -29,9 +29,11 @@ It achieves this by bridging the gap between premium chatbot accounts and applic
 
 - [x] [Grok](https://grok.com/)
 - [x] [Mistral](https://chat.mistral.ai/chat)
+- [x] [OpenAI](https://chatgpt.com/)
+- [x] [DeepSeek](https://chat.deepseek.com/)
+- [ ] Gemini
 - [ ] Anthropic
-- [x] OpenAI
-- [ ] DeepSeek
+- [ ] Perplexity
 - [ ] ...
 
 ## Workflow

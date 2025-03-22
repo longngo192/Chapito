@@ -1,5 +1,5 @@
 from chapito.config import Config
-from chapito import grok_chat, mistral_chat, openai_chat, perplexity_chat
+from chapito import deepseek_chat, gemini_chat, grok_chat, mistral_chat, openai_chat, perplexity_chat
 from chapito.proxy import init_proxy
 from chapito.types import Chatbot
 
@@ -22,6 +22,14 @@ def main():
     if config.chatbot == Chatbot.OPENAI:
         driver = openai_chat.initialize_driver(config)
         init_proxy(driver, openai_chat.send_request_and_get_response)
+
+    if config.chatbot == Chatbot.GEMINI:
+        driver = gemini_chat.initialize_driver(config)
+        init_proxy(driver, gemini_chat.send_request_and_get_response)
+
+    if config.chatbot == Chatbot.DEEPSEEK:
+        driver = deepseek_chat.initialize_driver(config)
+        init_proxy(driver, deepseek_chat.send_request_and_get_response)
 
 
 if __name__ == "__main__":

@@ -13,3 +13,5 @@ class Chatbot(Enum):
     MISTRAL = "mistral"
     PERPLEXITY = "perplexity"
     OPENAI = "openai"
+    GEMINI = "gemini"
+    DEEPSEEK = "deepseek"
