@@ -75,8 +75,9 @@ Application will use parameters from command-line args or `config.ini` file.
 **Parameters**  
 `cli parameter` / `config file parameter`: description  
 
-- `--chatbot <NAME>`: name of the chat service to use. Possible values: `grok`, `mistral`.
-- `--use-browser-profile` / `use_browser_profile`: when used, a profile will be saved and reused. Usefull when you don't want to authenticate everytime.
+- `--chatbot <NAME>` / `chatbot`: name of the chat service to use. Possible values: `grok`, `mistral`.
+- `--stream` / `stream`: (toggle) when used, response will be sent as a stream (Server-Sent Events protocol).
+- `--use-browser-profile` / `use_browser_profile`: (toggle) when used, a profile will be saved and reused. Usefull when you don't want to authenticate everytime.
 - `--profile-path <PATH>` / `browser_profile_path`: when `--use-browser-profile`, provides the `PATH` where the profile is stored.
 - `--user-agent <VALUE>` / `browser_user_agent`: the user-agent to use.
 - `--verbosity <VALUE>` / `verbosity`: the verbosity to use. Possible values: `0` = ERROR, `1` = WARNING, `2` = INFO, `3` = DEBUG.
