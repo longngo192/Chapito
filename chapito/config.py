@@ -17,6 +17,7 @@ DEFAULT_BROWSER_USER_AGENT: str = (
 )
 DEFAULT_VERBOSITY: int = 1
 DEFAULT_CHATBOT: Chatbot = Chatbot.GROK
+DEFAULT_STREAM: bool = False
 
 
 def create_config_file() -> None:
@@ -30,6 +31,7 @@ class Config:
     browser_user_agent: str = DEFAULT_BROWSER_USER_AGENT
     verbosity: int = DEFAULT_VERBOSITY
     chatbot: Chatbot = DEFAULT_CHATBOT
+    stream: bool = DEFAULT_STREAM
 
     def __init__(self):
         logging.debug("Initializing config...")
@@ -40,10 +42,11 @@ class Config:
             "--config", type=str, help="Path to the config file (default: config.ini)", default=DEFAULT_CONFIG_PATH
         )
         parser.add_argument("--chatbot", type=str, help="Chatbot to connect to (available: grok, mistral)")
+        parser.add_argument("--stream", action="store_true", help="Send response as stream")
         parser.add_argument("--use-browser-profile", action="store_true", help="Use a browser profile")
         parser.add_argument("--profile-path", type=str, help="Path to the browser profile")
         parser.add_argument("--user-agent", type=str, help="User agent to use")
-        parser.add_argument("--verbosity", type=int, help="User agent to use")
+        parser.add_argument("--verbosity", type=int, help="Verbosity level")
         args = parser.parse_args()
         self.config_path = args.config or DEFAULT_CONFIG_PATH
         config = configparser.ConfigParser()
@@ -51,6 +54,7 @@ class Config:
 
         self.verbosity = args.verbosity or config.getint("DEFAULT", "verbosity", fallback=DEFAULT_VERBOSITY)
         setup_logging_verbosity(self.verbosity)
+        self.stream = args.stream or config.getboolean("DEFAULT", "stream", fallback=DEFAULT_STREAM)
         self.use_browser_profile = args.use_browser_profile or config.getboolean(
             "DEFAULT", "use_browser_profile", fallback=DEFAULT_USE_BROWSER_PROFILE
         )

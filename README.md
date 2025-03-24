@@ -2,9 +2,11 @@
 
 Free API access using your web-based chatbots ![logo](https://github.com/user-attachments/assets/c21a077e-860b-4c84-ab7e-7b65b3e68379)
 
-## Current version 0.1.4 (2025-03-22)
+## Current version
 
-- [NEW] Add DeepSeek.
+### 0.1.5 (2025-03-24)
+
+- [NEW] Support "stream" output.
 
 ## Presentation
 
@@ -130,3 +132,6 @@ uv sync
 **A:** This is because the chat bot is designed to generate code that can be used in XML documents. The `<![CDATA[` and `]]>` tags are used to indicate that the text inside them should be treated as plain text, not as XML markup. If you want to remove these tags, you can explicitly tell the chat bot that you don't want to use them.
 Eg. with `Roo-Code`:
 Add the following custom instruction: `Do not use <![CDATA[ and ]]> tags in your responses.`
+  
+**Q: Cline says it did't received response.**  
+**A:** Check if *Chapito* is in "stream" output, since Cline only supports this type of output.  

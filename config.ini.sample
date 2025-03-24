@@ -8,3 +8,6 @@ browser_user_agent = Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.3
 # The chatbot to use. 
 # Possible values: grok, mistral, openai, deepseek
 chatbot = mistral
+
+# Response to stream?
+stream = True

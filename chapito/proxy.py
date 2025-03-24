@@ -1,12 +1,22 @@
+import json
 from typing import Callable, List, Optional
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 
 import time
 import uuid
 from pydantic import BaseModel, field_validator
 import uvicorn
 import logging
+
+from chapito.config import Config
+
+
+async def generate_json_stream(data: dict):
+    data["choices"][0]["delta"] = data["choices"][0]["message"]
+    del data["choices"][0]["message"]
+    yield f"data: {json.dumps(data)}\n\n"
+    yield "data: [DONE]\n\n"
 
 
 class Message(BaseModel):
@@ -75,23 +85,36 @@ async def chat_completions(request: ChatRequest):
     logging.debug(f"Response from chat ends with: {response_content[-100:]}")
     logging.debug("Sending response")
 
-    return {
+    data = {
         "id": f"chatcmpl-{uuid.uuid4()}",
         "object": "chat.completion",
         "created": int(time.time()),
-        "model": "gpt-3.5-turbo",
+        "model": request.model,
         "choices": [
-            {"index": 0, "message": {"role": "assistant", "content": response_content}, "finish_reason": "stop"}
+            {
+                "index": 0,
+                "message": {"role": "assistant", "content": response_content, "refusal": None},
+                "finish_reason": "stop",
+                "logprobs": {"content": [], "refusal": []},
+            }
         ],
         "usage": {
             "prompt_tokens": len(prompt.split()),
             "completion_tokens": len(response_content.split()),
             "total_tokens": len(prompt.split()) + len(response_content.split()),
+            "cost": 0,
         },
     }
+    if app.state.config.stream:
+        logging.debug("Send StreamingResponse")
+        return StreamingResponse(generate_json_stream(data), media_type="text/event-stream")
+    else:
+        logging.debug("Send JSONResponse")
+        return JSONResponse(data)
 
 
-def init_proxy(driver, send_request_and_get_response: Callable) -> None:
+def init_proxy(driver, send_request_and_get_response: Callable, config: Config) -> None:
     app.state.driver = driver
     app.state.send_request_and_get_response = send_request_and_get_response
+    app.state.config = config
     uvicorn.run(app, host="127.0.0.1", port=5001)

@@ -1,6 +1,6 @@
 [project]
 name = "Chapito"
-version = "0.1.4"
+version = "0.1.5"
 description = "Free API access using your web-based chatbots"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -8,8 +8,12 @@ dependencies = [
     "beautifulsoup4>=4.13.3",
     "fastapi>=0.115.11",
     "pyperclip>=1.9.0",
-    "pytest>=8.3.5",
     "selenium>=4.29.0",
     "selenium-stealth>=1.0.6",
     "uvicorn>=0.34.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
 ]
