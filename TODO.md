@@ -8,7 +8,7 @@
 
 ## BUG
 
-- [x] Correct error "/chat/completions HTTP/1.1" 422 Unprocessable Entity"
+- [ ] Fix AIder problem with `--stream`.
 
 ## TESTS
 

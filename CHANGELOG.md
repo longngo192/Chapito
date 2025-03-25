@@ -1,5 +1,9 @@
 # Chapito - Changelog
 
+## 0.1.6 (2025-03-25)
+
+- [NEW] Add `--no-stream` parameter.
+
 ## 0.1.5 (2025-03-24)
 
 - [NEW] Support "stream" output.

@@ -4,6 +4,7 @@ from enum import Enum
 import logging
 import os.path
 from shutil import copy
+import sys
 
 from chapito.tools.log import setup_logging_verbosity
 from chapito.types import Chatbot
@@ -43,6 +44,7 @@ class Config:
         )
         parser.add_argument("--chatbot", type=str, help="Chatbot to connect to (available: grok, mistral)")
         parser.add_argument("--stream", action="store_true", help="Send response as stream")
+        parser.add_argument("--no-stream", action="store_true", help="Don't send response as stream")
         parser.add_argument("--use-browser-profile", action="store_true", help="Use a browser profile")
         parser.add_argument("--profile-path", type=str, help="Path to the browser profile")
         parser.add_argument("--user-agent", type=str, help="User agent to use")
@@ -54,7 +56,13 @@ class Config:
 
         self.verbosity = args.verbosity or config.getint("DEFAULT", "verbosity", fallback=DEFAULT_VERBOSITY)
         setup_logging_verbosity(self.verbosity)
+        if args.stream and args.no_stream:
+            logging.error("Flags `--stream` and `--no-stream` are exclusive.")
+            sys.exit()
+
         self.stream = args.stream or config.getboolean("DEFAULT", "stream", fallback=DEFAULT_STREAM)
+        if args.no_stream:
+            self.stream = False
         self.use_browser_profile = args.use_browser_profile or config.getboolean(
             "DEFAULT", "use_browser_profile", fallback=DEFAULT_USE_BROWSER_PROFILE
         )

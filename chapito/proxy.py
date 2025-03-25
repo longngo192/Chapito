@@ -95,7 +95,7 @@ async def chat_completions(request: ChatRequest):
                 "index": 0,
                 "message": {"role": "assistant", "content": response_content, "refusal": None},
                 "finish_reason": "stop",
-                "logprobs": {"content": [], "refusal": []},
+                # "logprobs": {"content": [], "refusal": []},
             }
         ],
         "usage": {

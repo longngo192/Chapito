@@ -4,9 +4,9 @@ Free API access using your web-based chatbots ![logo](https://github.com/user-at
 
 ## Current version
 
-### 0.1.5 (2025-03-24)
+### 0.1.6 (2025-03-25)
 
-- [NEW] Support "stream" output.
+- [NEW] Add `--no-stream` parameter.
 
 ## Presentation
 
@@ -85,7 +85,7 @@ Application will use parameters from command-line args or `config.ini` file.
 Exemple:  
 
 ```bash
-uv run main.py --chatbot grok --verbosity 1
+uv run main.py --chatbot grok --no-stream --verbosity 1
 ```
 
 ### 2. Run your AI tool
@@ -136,3 +136,6 @@ Add the following custom instruction: `Do not use <![CDATA[ and ]]> tags in your
   
 **Q: Cline says it did't received response.**  
 **A:** Check if *Chapito* is in "stream" output, since Cline only supports this type of output.  
+
+**Q: AIder raises an exception `litellm.APIError: APIError: OpenAIException - 'str' object has no attribute 'model_dump'`.**  
+**A:** *AIder* and *Chapito* have to be in "no-stream" output.  
