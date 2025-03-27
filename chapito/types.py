@@ -15,3 +15,5 @@ class Chatbot(Enum):
     OPENAI = "openai"
     GEMINI = "gemini"
     DEEPSEEK = "deepseek"
+    ANTHROPIC = "anthropic"
+    GITHUB = "github"

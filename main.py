@@ -1,5 +1,5 @@
 from chapito.config import Config
-from chapito import deepseek_chat, gemini_chat, grok_chat, mistral_chat, openai_chat, perplexity_chat
+from chapito import anthropic_chat, deepseek_chat, gemini_chat, grok_chat, mistral_chat, openai_chat, perplexity_chat
 from chapito.proxy import init_proxy
 from chapito.types import Chatbot
 
@@ -30,6 +30,10 @@ def main():
     if config.chatbot == Chatbot.DEEPSEEK:
         driver = deepseek_chat.initialize_driver(config)
         init_proxy(driver, deepseek_chat.send_request_and_get_response, config)
+
+    if config.chatbot == Chatbot.ANTHROPIC:
+        driver = anthropic_chat.initialize_driver(config)
+        init_proxy(driver, anthropic_chat.send_request_and_get_response, config)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,9 @@
 # Chapito - Changelog
 
+## 0.1.7 (2025-03-27)
+
+- [NEW] Add Anthropic support.
+
 ## 0.1.6 (2025-03-25)
 
 - [NEW] Add `--no-stream` parameter.

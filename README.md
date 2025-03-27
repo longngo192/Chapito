@@ -4,9 +4,9 @@ Free API access using your web-based chatbots ![logo](https://github.com/user-at
 
 ## Current version
 
-### 0.1.6 (2025-03-25)
+### 0.1.7 (2025-03-27)
 
-- [NEW] Add `--no-stream` parameter.
+- [NEW] Add Anthropic support.
 
 ## Presentation
 
@@ -34,8 +34,9 @@ It achieves this by bridging the gap between premium chatbot accounts and applic
 - [x] [OpenAI](https://chatgpt.com/)
 - [x] [DeepSeek](https://chat.deepseek.com/)
 - [ ] Gemini
-- [ ] Anthropic
+- [x] [Anthropic](https://claude.ai/new)
 - [ ] Perplexity
+- [ ] Github Copilot
 - [ ] ...
 
 ## Workflow
