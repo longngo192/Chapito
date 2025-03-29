@@ -4,9 +4,9 @@ Free API access using your web-based chatbots ![logo](https://github.com/user-at
 
 ## Current version
 
-### 0.1.7 (2025-03-27)
+### 0.1.8 (2025-03-29)
 
-- [NEW] Add Anthropic support.
+- [NEW] Add Duckduckgo support.
 
 ## Presentation
 
@@ -37,6 +37,7 @@ It achieves this by bridging the gap between premium chatbot accounts and applic
 - [x] [Anthropic](https://claude.ai/new)
 - [ ] Perplexity
 - [ ] Github Copilot
+- [x] [Duckduckgo](https://duck.ai/)
 - [ ] ...
 
 ## Workflow

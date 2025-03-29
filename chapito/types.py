@@ -17,3 +17,4 @@ class Chatbot(Enum):
     DEEPSEEK = "deepseek"
     ANTHROPIC = "anthropic"
     GITHUB = "github"
+    DUCKDUCKGO = "duckduckgo"

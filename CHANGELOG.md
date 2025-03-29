@@ -1,5 +1,9 @@
 # Chapito - Changelog
 
+## 0.1.8 (2025-03-29)
+
+- [NEW] Add Duckduckgo support.
+
 ## 0.1.7 (2025-03-27)
 
 - [NEW] Add Anthropic support.

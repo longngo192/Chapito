@@ -1,7 +1,18 @@
 from chapito.config import Config
-from chapito import anthropic_chat, deepseek_chat, gemini_chat, grok_chat, mistral_chat, openai_chat, perplexity_chat
+from chapito import (
+    anthropic_chat,
+    deepseek_chat,
+    duckduckgo_chat,
+    gemini_chat,
+    grok_chat,
+    mistral_chat,
+    openai_chat,
+    perplexity_chat,
+)
 from chapito.proxy import init_proxy
 from chapito.types import Chatbot
+
+__version__ = "0.1.8"
 
 
 def main():
@@ -34,6 +45,10 @@ def main():
     if config.chatbot == Chatbot.ANTHROPIC:
         driver = anthropic_chat.initialize_driver(config)
         init_proxy(driver, anthropic_chat.send_request_and_get_response, config)
+
+    if config.chatbot == Chatbot.DUCKDUCKGO:
+        driver = duckduckgo_chat.initialize_driver(config)
+        init_proxy(driver, duckduckgo_chat.send_request_and_get_response, config)
 
 
 if __name__ == "__main__":
