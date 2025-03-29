@@ -3,6 +3,7 @@
 ## 0.1.8 (2025-03-29)
 
 - [NEW] Add Duckduckgo support.
+- [NEW] Check if latest version at startup.
 
 ## 0.1.7 (2025-03-27)
 

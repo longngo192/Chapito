@@ -6,6 +6,8 @@ from chapito.types import OsType
 from selenium.webdriver.common.keys import Keys
 import pyperclip
 import logging
+import requests
+import re
 from selenium_stealth import stealth
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -69,3 +71,43 @@ def create_driver(config: Config) -> webdriver.Chrome | webdriver.Firefox:
         fix_hairline=True,
     )
     return driver
+
+
+def check_official_version(version: str) -> bool:
+    try:
+        official_version = get_last_version()
+        if version == official_version:
+            return True
+        logging.info(f"Official version: {official_version}")
+        logging.info("Please update to the latest version.")
+        logging.info("More infos: https://github.com/Yajusta/Chapito")
+        return False
+    except Exception as e:
+        logging.error(f"Error checking version: {e}")
+        return False
+
+
+def get_last_version() -> str:
+    response = requests.get("https://raw.githubusercontent.com/Yajusta/Chapito/refs/heads/main/pyproject.toml")
+    response.raise_for_status()
+    if match := re.search(r'version\s*=\s*"([^"]+)"', response.text):
+        return match[1]
+    return "0.0.0"
+
+
+def greeting(version: str) -> None:
+    text = rf"""
+  /██████  /██                           /██   /██              
+ /██__  ██| ██                          |__/  | ██              
+| ██  \__/| ███████   /██████   /██████  /██ /██████    /██████ 
+| ██      | ██__  ██ |____  ██ /██__  ██| ██|_  ██_/   /██__  ██
+| ██      | ██  \ ██  /███████| ██  \ ██| ██  | ██    | ██  \ ██
+| ██    ██| ██  | ██ /██__  ██| ██  | ██| ██  | ██ /██| ██  | ██
+|  ██████/| ██  | ██|  ███████| ███████/| ██  |  ████/|  ██████/
+ \______/ |__/  |__/ \_______/| ██____/ |__/   \___/   \______/ 
+                              | ██                              
+                              | ██                              
+                              |__/        Version {version}
+"""
+
+    print(text)

@@ -7,6 +7,7 @@ Free API access using your web-based chatbots ![logo](https://github.com/user-at
 ### 0.1.8 (2025-03-29)
 
 - [NEW] Add Duckduckgo support.
+- [NEW] Check if latest version at startup.
 
 ## Presentation
 

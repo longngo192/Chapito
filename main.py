@@ -10,13 +10,16 @@ from chapito import (
     perplexity_chat,
 )
 from chapito.proxy import init_proxy
+from chapito.tools.tools import check_official_version, greeting
 from chapito.types import Chatbot
 
 __version__ = "0.1.8"
 
 
 def main():
+    greeting(__version__)
     config = Config()
+    check_official_version(__version__)
 
     if config.chatbot == Chatbot.GROK:
         driver = grok_chat.initialize_driver(config)
