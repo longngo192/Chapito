@@ -20,6 +20,9 @@ DEFAULT_VERBOSITY: int = 1
 DEFAULT_CHATBOT: Chatbot = Chatbot.GROK
 DEFAULT_STREAM: bool = False
 
+DEFAULT_HOST = "127.0.0.1"
+DEFAULT_PORT = 5001
+
 
 def create_config_file() -> None:
     copy(SAMPLE_CONFIG_FILE, DEFAULT_CONFIG_PATH)
@@ -33,6 +36,8 @@ class Config:
     verbosity: int = DEFAULT_VERBOSITY
     chatbot: Chatbot = DEFAULT_CHATBOT
     stream: bool = DEFAULT_STREAM
+    host: str = DEFAULT_HOST
+    port: int = DEFAULT_PORT
 
     def __init__(self):
         logging.debug("Initializing config...")
@@ -49,6 +54,8 @@ class Config:
         parser.add_argument("--profile-path", type=str, help="Path to the browser profile")
         parser.add_argument("--user-agent", type=str, help="User agent to use")
         parser.add_argument("--verbosity", type=int, help="Verbosity level")
+        parser.add_argument("--host", type=str, help="Host/IP to bind to")
+        parser.add_argument("--port", type=int, help="Port to listen on")
         args = parser.parse_args()
         self.config_path = args.config or DEFAULT_CONFIG_PATH
         config = configparser.ConfigParser()
@@ -80,5 +87,8 @@ class Config:
             chatbot = DEFAULT_CHATBOT
 
         self.chatbot = Chatbot(chatbot)
+
+        self.host = args.host or config.get("DEFAULT", "host", fallback=DEFAULT_HOST)
+        self.port = args.port or config.getint("DEFAULT", "port", fallback=DEFAULT_PORT)
 
         logging.debug(f"Config initialized: {self.__dict__}")
