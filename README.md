@@ -4,10 +4,11 @@ Free API access using your web-based chatbots ![logo](https://github.com/user-at
 
 ## Current version
 
-### 0.1.8 (2025-03-29)
+### 0.1.9 (2025-03-30)
 
-- [NEW] Add Duckduckgo support.
-- [NEW] Check if latest version at startup.
+- [NEW] Host and port selection in configuration file and in command-line (thanks to @hapheus).
+- [NEW] Add `/models` endpoint for compatibility (thanks to @hapheus).
+- [FIX] Display last revelant message (thanks to @hapheus).
 
 ## Presentation
 
@@ -83,6 +84,8 @@ Application will use parameters from command-line args or `config.ini` file.
 - `--use-browser-profile` / `use_browser_profile`: (toggle) when used, a profile will be saved and reused. Usefull when you don't want to authenticate everytime.
 - `--profile-path <PATH>` / `browser_profile_path`: when `--use-browser-profile`, provides the `PATH` where the profile is stored.
 - `--user-agent <VALUE>` / `browser_user_agent`: the user-agent to use.
+- `--host <VALUE>` / `host`: the host IP to use. Default value: `127.0.0.1`.
+- `--port <VALUE>` / `port`: the host port to use. Default value: `5001`.
 - `--verbosity <VALUE>` / `verbosity`: the verbosity to use. Possible values: `0` = ERROR, `1` = WARNING, `2` = INFO, `3` = DEBUG.
 
 Exemple:  

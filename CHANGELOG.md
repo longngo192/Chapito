@@ -1,5 +1,11 @@
 # Chapito - Changelog
 
+## 0.1.9 (2025-03-30)
+
+- [NEW] Host and port selection in configuration file and in command-line (thanks to @hapheus).
+- [NEW] Add `/models` endpoint for compatibility (thanks to @hapheus).
+- [FIX] Display last revelant message (thanks to @hapheus).
+
 ## 0.1.8 (2025-03-29)
 
 - [NEW] Add Duckduckgo support.
