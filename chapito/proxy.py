@@ -78,9 +78,10 @@ async def chat_completions(request: ChatRequest):
 
     if not request.messages:
         raise HTTPException(status_code=400, detail="Field 'messages' is missing or empty")
-
-    if len(request.messages) >= 2:
-        logging.debug(f"Last relevant message in request: {request.messages[-2]}")
+        
+    last_revelant_message_position = -2 if len(request.messages) >= 2 else -1
+    if len(request.messages) > 0:
+        logging.debug(f"Last relevant message in request: {request.messages[last_revelant_message_position]}")
 
     index_of_last_message = find_index_from_end(request.messages, last_chat_messages)
     prompt = "\n\n".join(
