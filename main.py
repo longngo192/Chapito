@@ -13,7 +13,7 @@ from chapito.proxy import init_proxy
 from chapito.tools.tools import check_official_version, greeting
 from chapito.types import Chatbot
 
-__version__ = "0.1.8"
+__version__ = "0.1.9"
 
 
 def main():
