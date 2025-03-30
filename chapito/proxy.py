@@ -58,6 +58,17 @@ def find_index_from_end(lst: List[Message], values: List[str]) -> int:
 async def not_found_handler(request: Request, exc: HTTPException):
     return JSONResponse(status_code=404, content={"message": "Undefined route", "requested_url": request.url.path})
 
+@app.get("/models")
+async def get_models(): 
+    return [
+        {
+            "name": "chapito",
+            "type": "chat",
+            "censored": True,
+            "description": "Chapito",
+            "baseModel": True
+        }
+    ]
 
 @app.post("/chat/completions")
 async def chat_completions(request: ChatRequest):
@@ -67,8 +78,10 @@ async def chat_completions(request: ChatRequest):
 
     if not request.messages:
         raise HTTPException(status_code=400, detail="Field 'messages' is missing or empty")
-
-    logging.debug(f"Last revelant message in request: {request.messages[-2]}")
+        
+    last_revelant_message_position = -2 if len(request.messages) >= 2 else -1
+    if len(request.messages) > 0:
+        logging.debug(f"Last relevant message in request: {request.messages[last_revelant_message_position]}")
 
     index_of_last_message = find_index_from_end(request.messages, last_chat_messages)
     prompt = "\n\n".join(
@@ -117,4 +130,7 @@ def init_proxy(driver, send_request_and_get_response: Callable, config: Config) 
     app.state.driver = driver
     app.state.send_request_and_get_response = send_request_and_get_response
     app.state.config = config
-    uvicorn.run(app, host="127.0.0.1", port=5001)
+
+    logging.debug(f"Listening on: {config.host}:{config.port}")
+
+    uvicorn.run(app, host=config.host, port=config.port)
