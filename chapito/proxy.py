@@ -62,10 +62,10 @@ async def not_found_handler(request: Request, exc: HTTPException):
 async def get_models(): 
     return [
         {
-            "name": "chatipo",
+            "name": "chapito",
             "type": "chat",
             "censored": True,
-            "description": "Chatipo",
+            "description": "Chapito",
             "baseModel": True
         }
     ]
